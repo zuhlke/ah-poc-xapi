@@ -1,8 +1,5 @@
 language: java
 
-before_deploy:
-  - gradle test
-
 deploy:
   provider: cloudfoundry
   username: $PCF_USERNAME
