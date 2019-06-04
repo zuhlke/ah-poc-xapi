@@ -1,5 +1,8 @@
 # ah-poc-xapi
 
+This is an API which consumes the ah-poc PAPI. It has a travis pipeline which deploys it into the ah PCF org. It's requests to the PAPI are
+done using WebFlux.
+
 ## Example
 
 If you hit this API with a request like
