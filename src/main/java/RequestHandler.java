@@ -8,7 +8,7 @@ public class RequestHandler {
     }
 
     public String home() {
-        return "This is a springboot app";
+        return "This is the aimless-hammer PoC XAPI.";
     }
 
     public Mono<String> sumBalances(String customerId) {

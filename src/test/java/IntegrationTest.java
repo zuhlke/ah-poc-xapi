@@ -25,7 +25,7 @@ public class IntegrationTest {
 
         String responseText = getRequestText("/");
 
-        assertThat(responseText, equalTo("This is a springboot app"));
+        assertThat(responseText, equalTo("This is the aimless-hammer PoC XAPI."));
     }
 
     @Test
