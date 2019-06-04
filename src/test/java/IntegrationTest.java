@@ -2,14 +2,13 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
+import reactor.core.publisher.Mono;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class IntegrationTest {
     private final int portNumber = 9090;
@@ -30,15 +29,15 @@ public class IntegrationTest {
     }
 
     @Test
-    public void GET_balances_returnsBalancesFromPapi() throws UnirestException {
-        String expectedJson = "{\"balances\":\"stubbed\"}";
+    public void GET_sumBalances_returnsSumOfBalancesFromPapi() throws UnirestException {
         PapiService stubPapiService = mock(PapiService.class);
-        when(stubPapiService.balancesJson("1")).thenReturn(expectedJson);
-        SpringController.startWithInjectedDependencies(portNumber, stubPapiService);
+        when(stubPapiService.sumBalances("1")).thenReturn(Mono.just(1234.0));
+        SpringController.startWithInjectedPapiService(portNumber, stubPapiService);
 
-        String responseText = getRequestText("/balances?customer-id=1");
+        String responseText = getRequestText("/sum-balances?customer-id=1");
 
-        assertThat(responseText, equalTo(expectedJson));
+        String expectedResponse = "{\"accountNumber\": \"1\", \"sumBalance\": \"1234.0\"}";
+        assertThat(responseText, equalTo(expectedResponse));
     }
 
     private String getRequestText(String requestPath) throws UnirestException {

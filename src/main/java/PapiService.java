@@ -1,3 +1,5 @@
+import reactor.core.publisher.Mono;
+
 public interface PapiService {
-    String balancesJson(String customerId);
+    Mono<Double> sumBalances(String customerId);
 }
