@@ -1,0 +1,5 @@
+---
+applications:
+  - name: ah-poc-xapi
+    memory: 768M
+    path: build/libs/ah-poc-xapi-1.0-SNAPSHOT.jar

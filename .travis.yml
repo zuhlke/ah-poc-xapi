@@ -1,0 +1,14 @@
+language: java
+
+before_deploy:
+  - gradle test
+
+deploy:
+  provider: cloudfoundry
+  username: $PCF_USERNAME
+  password: $PCF_PASSWORD
+  api: $PCF_API
+  organization: $PCF_ORG
+  space: $PCF_SPACE
+  manifest: manifest.yml # (optional)  Defaults to manifest.yml.
+  app_name: ah-poc-xapi # (optional)
