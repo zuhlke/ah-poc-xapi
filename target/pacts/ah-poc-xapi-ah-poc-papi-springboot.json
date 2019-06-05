@@ -1,53 +1,53 @@
 {
-  "provider": {
-    "name": "ah-poc-papi-springboot"
-  },
-  "consumer": {
-    "name": "ah-poc-xapi"
-  },
-  "interactions": [
-    {
-      "description": "A request for a list of balances for a customer with id 1",
-      "request": {
-        "method": "GET",
-        "path": "/reactive-balance",
-        "query": {
-          "customer-id": [
-            "1"
-          ]
-        }
-      },
-      "response": {
-        "status": 200,
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "body": [
-          {
-            "accountType": "CreditCardAccount",
-            "accountNumber": "1234567890",
-            "balance": "1234.50"
-          },
-          {
-            "accountType": "CurrentAccount",
-            "accountNumber": "64746383648",
-            "balance": "34.50"
-          }
-        ]
-      },
-      "providerStates": [
-        {
-          "name": "The PAPI is backed by two working SAPIs, each able to serve account data for a customer with id 1"
-        }
-      ]
-    }
-  ],
-  "metadata": {
-    "pactSpecification": {
-      "version": "3.0.0"
+    "provider": {
+        "name": "ah-poc-papi-springboot"
     },
-    "pact-jvm": {
-      "version": "3.5.22"
+    "consumer": {
+        "name": "ah-poc-xapi"
+    },
+    "interactions": [
+        {
+            "description": "A request for a list of balances for a customer with id 1",
+            "request": {
+                "method": "GET",
+                "path": "/reactive-balance",
+                "query": {
+                    "customer-id": [
+                        "1"
+                    ]
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": [
+                    {
+                        "accountType": "CreditCardAccount",
+                        "accountNumber": "1234567890",
+                        "balance": "1234.50"
+                    },
+                    {
+                        "accountType": "CurrentAccount",
+                        "accountNumber": "64746383648",
+                        "balance": "34.50"
+                    }
+                ]
+            },
+            "providerStates": [
+                {
+                    "name": "The PAPI is backed by two working SAPIs, each able to serve account data for a customer with id 1"
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "pactSpecification": {
+            "version": "3.0.0"
+        },
+        "pact-jvm": {
+            "version": "3.5.22"
+        }
     }
-  }
 }
