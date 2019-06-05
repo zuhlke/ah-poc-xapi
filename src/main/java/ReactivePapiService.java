@@ -16,8 +16,7 @@ public class ReactivePapiService implements PapiService {
     public Mono<Double> sumBalances(String customerId) {
         String url = expandUrl(balancesPapiUrlTemplate, customerId);
 
-        return reactiveRestClient.get(url)
-                .bodyToMono(BalanceInformation[].class)
+        return reactiveRestClient.get(url, BalanceInformation[].class)
                 .map(balanceInformationArray -> Arrays.stream(balanceInformationArray)
                         .mapToDouble(BalanceInformation::balance)
                         .sum());
