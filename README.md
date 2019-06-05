@@ -30,6 +30,10 @@ added comments in the test class itself.
 #### Next steps
 
 1. Verify the contract in the consumer pipeline
+    - I've tried to use this on the PAPI https://github.com/DiUS/pact-jvm/tree/master/provider/pact-jvm-provider-maven but with no luck so far. 
 2. Run a pact broker on PCF
+    - Either on docker or ruby
 3. Upload generated pacts to the pact broker
+    - Iris' example uses the gradle plugin (https://github.com/zuhlke/pact-consumer/blob/master/build.gradle#L26)
 4. Run pacts from the pact broker within the provider's pipeline
+
