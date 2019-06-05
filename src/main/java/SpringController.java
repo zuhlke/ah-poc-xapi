@@ -16,14 +16,10 @@ public class SpringController {
     private static RequestHandler requestHandler;
 
     public static void start(int portNumber) {
-        SpringProps props = SpringProps.constructDefaultProps(portNumber);
-        SpringController.requestHandler = new RequestHandler(new ReactivePapiService(new WebfluxRestClient(WebClient.create()), props.papiBalancesUrlTemplate));
-        context = new SpringApplicationBuilder(SpringController.class)
-                .properties(props.toMap())
-                .run();
+        startUsingReactiveRestClient(portNumber, new WebfluxRestClient(WebClient.create()));
     }
 
-    public static void startWithInjectedReactiveRestClient(int portNumber, ReactiveRestClient reactiveRestClient) {
+    public static void startUsingReactiveRestClient(int portNumber, ReactiveRestClient reactiveRestClient) {
         SpringProps props = SpringProps.constructDefaultProps(portNumber);
         SpringController.requestHandler = new RequestHandler(new ReactivePapiService(reactiveRestClient, props.papiBalancesUrlTemplate));
         context = new SpringApplicationBuilder(SpringController.class)
