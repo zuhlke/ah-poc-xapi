@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.HashMap;
-
 @RestController
 @EnableAutoConfiguration
 public class SpringController {
@@ -18,34 +16,26 @@ public class SpringController {
     private static RequestHandler requestHandler;
 
     public static void start(int portNumber) {
-        HashMap<String, Object> props = createProps(portNumber);
+        SpringProps props = SpringProps.constructDefaultProps(portNumber);
         ReactiveRestClient reactiveRestClient = new ReactiveRestClient(WebClient.create());
-        String balancesPapiUrlTemplate = (String) props.get("papi.balances.url");
-        ReactivePapiService papiService = new ReactivePapiService(reactiveRestClient, balancesPapiUrlTemplate);
+        ReactivePapiService papiService = new ReactivePapiService(reactiveRestClient, props.papiBalancesUrlTemplate);
         SpringController.requestHandler = new RequestHandler(papiService);
         context = new SpringApplicationBuilder(SpringController.class)
-                .properties(props)
+                .properties(props.toMap())
                 .run();
     }
 
     public static void startWithInjectedPapiService(int portNumber, PapiService papiService) {
-        HashMap<String, Object> props = createProps(portNumber);
+        SpringProps props = SpringProps.constructDefaultProps(portNumber);
         SpringController.requestHandler = new RequestHandler(papiService);
         context = new SpringApplicationBuilder(SpringController.class)
-                .properties(props)
+                .properties(props.toMap())
                 .run();
     }
 
     public static void stop() {
         int exitCode = 0;
         SpringApplication.exit(context, (ExitCodeGenerator) () -> exitCode);
-    }
-
-    private static HashMap<String, Object> createProps(int portNumber) {
-        HashMap<String, Object> props = new HashMap<>();
-        props.put("server.port", portNumber);
-        props.put("papi.balances.url", "https://ah-poc-papi-springboot.cfapps.io/reactive-balance?customer-id={CUSTOMER_ID}");
-        return props;
     }
 
     @RequestMapping("/")
