@@ -6,6 +6,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class SpringController {
 
     public static void start(int portNumber) {
         HashMap<String, Object> props = createProps(portNumber);
-        SpringController.requestHandler = new RequestHandler(new ReactivePapiService((String) props.get("papi.balances.url")));
+        SpringController.requestHandler = new RequestHandler(new ReactivePapiService(WebClient.create(), (String) props.get("papi.balances.url")));
         context = new SpringApplicationBuilder(SpringController.class)
                 .properties(props)
                 .run();

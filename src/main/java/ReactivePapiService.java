@@ -8,11 +8,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ReactivePapiService implements PapiService {
-    private final WebClient webClient = WebClient.create();
+    private final WebClient webClient;
     private final String balancesPapiUrlTemplate;
 
-    public ReactivePapiService(String balancesPapiUrlTemplate) {
+    public ReactivePapiService(WebClient webClient, String balancesPapiUrlTemplate) {
         this.balancesPapiUrlTemplate = balancesPapiUrlTemplate;
+        this.webClient = webClient;
     }
 
     @Override
