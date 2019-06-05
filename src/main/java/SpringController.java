@@ -19,7 +19,10 @@ public class SpringController {
 
     public static void start(int portNumber) {
         HashMap<String, Object> props = createProps(portNumber);
-        SpringController.requestHandler = new RequestHandler(new ReactivePapiService(WebClient.create(), (String) props.get("papi.balances.url")));
+        ReactiveRestClient reactiveRestClient = new ReactiveRestClient(WebClient.create());
+        String balancesPapiUrlTemplate = (String) props.get("papi.balances.url");
+        ReactivePapiService papiService = new ReactivePapiService(reactiveRestClient, balancesPapiUrlTemplate);
+        SpringController.requestHandler = new RequestHandler(papiService);
         context = new SpringApplicationBuilder(SpringController.class)
                 .properties(props)
                 .run();

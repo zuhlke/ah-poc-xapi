@@ -75,4 +75,8 @@ public class BalanceInformation {
     public int hashCode() {
         return Objects.hash(accountType, accountNumber, balance, additionalProperties);
     }
+
+    public double balance() {
+        return Double.parseDouble(balance);
+    }
 }
