@@ -35,14 +35,17 @@ public class IntegrationTest {
 
     @Test
     public void GET_sumBalances_returnsSumOfBalancesFromPapi() throws UnirestException, IOException {
-        PapiService stubPapiService = mock(PapiService.class);
-        when(stubPapiService.sumBalances("1")).thenReturn(Mono.just(1234.0));
-        SpringController.startWithInjectedPapiService(portNumber, stubPapiService);
+        ReactiveRestClient stubReactiveRestClient = mock(ReactiveRestClient.class);
+        when(stubReactiveRestClient.get("https://ah-poc-papi-springboot.cfapps.io/reactive-balance?customer-id=1", BalanceInformation[].class)).thenReturn(Mono.just(new BalanceInformation[]{
+                BalanceInformation.fromFields("CreditCardAccount", "1234567890", "1234.50"),
+                BalanceInformation.fromFields("CurrentAccount", "64746383648", "34.50")
+        }));
+        SpringController.startWithInjectedReactiveRestClient(portNumber, stubReactiveRestClient);
 
         String responseText = getRequestText("/sum-balances?customer-id=1");
 
         Map<String, Double> map = readSumBalanceJsonResponseToMap(responseText);
-        assertThat(map.get("sumBalance"), equalTo(1234.0));
+        assertThat(map.get("sumBalance"), equalTo(1269.0));
     }
 
     private Map<String, Double> readSumBalanceJsonResponseToMap(String responseText) throws IOException {

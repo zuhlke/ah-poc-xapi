@@ -23,9 +23,9 @@ public class SpringController {
                 .run();
     }
 
-    public static void startWithInjectedPapiService(int portNumber, PapiService papiService) {
+    public static void startWithInjectedReactiveRestClient(int portNumber, ReactiveRestClient reactiveRestClient) {
         SpringProps props = SpringProps.constructDefaultProps(portNumber);
-        SpringController.requestHandler = new RequestHandler(papiService);
+        SpringController.requestHandler = new RequestHandler(new ReactivePapiService(reactiveRestClient, props.papiBalancesUrlTemplate));
         context = new SpringApplicationBuilder(SpringController.class)
                 .properties(props.toMap())
                 .run();

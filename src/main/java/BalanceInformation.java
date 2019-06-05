@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+@SuppressWarnings("FieldMayBeFinal")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "accountType",
@@ -19,6 +20,14 @@ public class BalanceInformation {
     private String balance;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
+
+    public static BalanceInformation fromFields(String accountType, String accountNumber, String balance) {
+        BalanceInformation balanceInformation = new BalanceInformation();
+        balanceInformation.setAccountType(accountType);
+        balanceInformation.setAccountNumber(accountNumber);
+        balanceInformation.setBalance(balance);
+        return balanceInformation;
+    }
 
     @JsonProperty("accountType")
     public String getAccountType() {
