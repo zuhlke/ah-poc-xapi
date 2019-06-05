@@ -19,9 +19,9 @@ then you'll get a response body like
 
 There is a pact test, `ReactivePapiServicePact`. The pact guidelines suggest writing your pact test as a test against your interface for
 interacting with the provider. Therefore this test is effectively a component test against the `ReactivePapiService` and
-`ReactiveRestClient`.
+`WebfluxRestClient`.
 
-- Perhaps it should just be a unit test against the `ReactiveRestClient`.
+- Perhaps it should just be a unit test against the `WebfluxRestClient`.
 
 When you run the pact test, a pact file is created in `target/pacts/` with the naming convention `<consumer_name>-<provider_name>.json`.
 The names of the consumer and provider are given in the test as overriden functions against the pact testing framework's API. I have

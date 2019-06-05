@@ -41,8 +41,8 @@ public class ReactivePapiServicePact extends ConsumerPactTestMk2 {
     protected void runTest(MockServer mockServer) {
         int port = mockServer.getPort();
         String stubPapiOrigin = "http://localhost:" + port;
-        ReactiveRestClient reactiveRestClient = new ReactiveRestClient(WebClient.create());
-        ReactivePapiService reactivePapiService = new ReactivePapiService(reactiveRestClient, stubPapiOrigin + "/reactive-balance?customer-id={CUSTOMER_ID}");
+        WebfluxRestClient webfluxRestClient = new WebfluxRestClient(WebClient.create());
+        ReactivePapiService reactivePapiService = new ReactivePapiService(webfluxRestClient, stubPapiOrigin + "/reactive-balance?customer-id={CUSTOMER_ID}");
 
         assertThatItCanSumAccountBalances(reactivePapiService);
         /*
