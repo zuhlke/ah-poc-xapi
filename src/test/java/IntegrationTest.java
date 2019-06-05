@@ -40,7 +40,7 @@ public class IntegrationTest {
                 BalanceInformation.fromFields("CreditCardAccount", "1234567890", "1234.50"),
                 BalanceInformation.fromFields("CurrentAccount", "64746383648", "34.50")
         }));
-        SpringController.startUsingReactiveRestClient(portNumber, stubReactiveRestClient);
+        SpringController.start(portNumber, stubReactiveRestClient);
 
         String responseText = getRequestText("/sum-balances?customer-id=1");
 
