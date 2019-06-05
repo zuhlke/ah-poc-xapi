@@ -36,7 +36,7 @@ public class IntegrationTest {
 
         String responseText = getRequestText("/sum-balances?customer-id=1");
 
-        String expectedResponse = "{\"accountNumber\": \"1\", \"sumBalance\": \"1234.0\"}";
+        String expectedResponse = "{\"sumBalance\": \"1234.0\"}";
         assertThat(responseText, equalTo(expectedResponse));
     }
 

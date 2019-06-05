@@ -12,6 +12,6 @@ public class RequestHandler {
     }
 
     public Mono<String> sumBalances(String customerId) {
-        return papiService.sumBalances(customerId).map(sumBalance -> new SumBalanceResponseBody(customerId, sumBalance).toJson());
+        return papiService.sumBalances(customerId).map(sumBalance -> new SumBalanceResponseBody(sumBalance).toJson());
     }
 }
