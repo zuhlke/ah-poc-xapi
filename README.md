@@ -1,5 +1,7 @@
 # ah-poc-xapi
 
+[![Build Status](https://travis-ci.com/zuhlke/ah-poc-xapi.svg?branch=master)](https://travis-ci.com/zuhlke/ah-poc-xapi)
+
 This is an API which consumes the ah-poc PAPI. It has a travis pipeline which deploys it into the ah PCF org. It's requests to the PAPI are
 done using WebFlux.
 
